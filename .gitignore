@@ -22,3 +22,7 @@ _testmain.go
 *.exe
 *.test
 *.prof
+
+# Bindata.go
+src/assets/assets.go
+src/templates/templates.go
