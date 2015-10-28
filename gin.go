@@ -1,21 +1,22 @@
 package main
 
 import (
-	"html/template"
-	// "net/http"
 	// "log"
-	"path/filepath"
 
-	"github.com/gin-gonic/contrib/renders/multitemplate"
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
+	"github.com/olebedev/staticbin"
 
-	// "./config"
-	"./models"
-	// "./routers/api"
-	"./modules/auth"
-	"./routers/api"
-	"./routers/www"
+	"assets"
+	"models"
+	"modules/auth"
+	"modules/render"
+	"routers/api"
+	"routers/www"
+)
+
+const (
+	BINDATA = false
 )
 
 func main() {
@@ -24,10 +25,22 @@ func main() {
 	r := gin.Default()
 
 	// 静态资源
-	r.Static("/assets", "./assets")
+	if BINDATA {
+		r.Use(staticbin.Static(assets.Asset, staticbin.Options{
+			Dir: "/",
+		}))
+	} else {
+		r.Static("/assets", "./assets")
+	}
 
-	r.HTMLRender = loadTemplates("./templates")
+	// 模板
+	if BINDATA {
+		r.HTMLRender = render.LoadBindataTemplates("templates")
+	} else {
+		r.HTMLRender = render.LoadTemplates("./templates")
+	}
 
+	// 模型
 	model := models.Model()
 	r.Use(model)
 
@@ -67,27 +80,4 @@ func main() {
 	}
 
 	r.Run(":8080") // listen and serve on 0.0.0.0:8080
-}
-
-func loadTemplates(templatesDir string) multitemplate.Render {
-	r := multitemplate.New()
-
-	layouts, err := filepath.Glob(templatesDir + "/layouts/*.tmpl")
-	if err != nil {
-		panic(err.Error())
-	}
-
-	includes, err := filepath.Glob(templatesDir + "/includes/*.tmpl")
-	if err != nil {
-		panic(err.Error())
-	}
-
-	// Generate our templates map from our layouts/ and includes/ directories
-	for _, layout := range layouts {
-		files := append(includes, layout)
-		tmpl := template.Must(template.ParseFiles(files...))
-		// log.Printf(filepath.Base(layout))
-		r.Add(filepath.Base(layout), tmpl)
-	}
-	return r
 }

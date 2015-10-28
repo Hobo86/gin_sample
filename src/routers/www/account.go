@@ -9,8 +9,8 @@ import (
 	"github.com/gin-gonic/gin"
 	// "github.com/gin-gonic/gin/binding"
 
-	"../../models"
-	"../../modules/auth"
+	"models"
+	"modules/auth"
 )
 
 type LoginForm struct {

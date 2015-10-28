@@ -1,4 +1,4 @@
-package api
+package www
 
 import (
 	"net/http"
@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	// "github.com/jinzhu/gorm"
 
-	"../../models"
+	"models"
 )
 
 func UserHandler(c *gin.Context) {
@@ -20,18 +20,8 @@ func UserHandler(c *gin.Context) {
 	model := models.Default(c)
 	u := model.GetUserById(id)
 
-	c.JSON(http.StatusOK, gin.H{
+	c.HTML(http.StatusOK, "user.tmpl", gin.H{
 		"title": "User",
 		"user":  u,
 	})
-}
-
-func UserLoginHandler(c *gin.Context) {
-
-	c.JSON(200, map[string]interface{}{"URI": "api user login"})
-}
-
-func UserRegisterHandler(c *gin.Context) {
-
-	c.JSON(200, map[string]interface{}{"URI": "api user regist"})
 }

@@ -3,7 +3,7 @@ package models
 import (
 	"time"
 
-	"../modules/auth"
+	"modules/auth"
 )
 
 func (m model) GetUserById(id int64) *User {
