@@ -707,34 +707,34 @@ func AssetNames() []string {
 
 // _bindata is a table, holding each asset generator, mapped to its name.
 var _bindata = map[string]func() (*asset, error){
-	"assets/css/bootstrap-combined.min.css": assetsCssBootstrapCombinedMinCss,
-	"assets/css/bootstrap-theme.css": assetsCssBootstrapThemeCss,
-	"assets/css/bootstrap-theme.css.map": assetsCssBootstrapThemeCssMap,
-	"assets/css/bootstrap-theme.min.css": assetsCssBootstrapThemeMinCss,
-	"assets/css/bootstrap.css": assetsCssBootstrapCss,
-	"assets/css/bootstrap.css.map": assetsCssBootstrapCssMap,
-	"assets/css/bootstrap.min.css": assetsCssBootstrapMinCss,
-	"assets/css/jquery.treetable.css": assetsCssJqueryTreetableCss,
-	"assets/css/jquery.treetable.theme.default.css": assetsCssJqueryTreetableThemeDefaultCss,
-	"assets/fonts/glyphicons-halflings-regular.eot": assetsFontsGlyphiconsHalflingsRegularEot,
-	"assets/fonts/glyphicons-halflings-regular.svg": assetsFontsGlyphiconsHalflingsRegularSvg,
-	"assets/fonts/glyphicons-halflings-regular.ttf": assetsFontsGlyphiconsHalflingsRegularTtf,
-	"assets/fonts/glyphicons-halflings-regular.woff": assetsFontsGlyphiconsHalflingsRegularWoff,
-	"assets/fonts/glyphicons-halflings-regular.woff2": assetsFontsGlyphiconsHalflingsRegularWoff2,
-	"assets/img/favicon.ico": assetsImgFaviconIco,
-	"assets/img/icon_brand.png": assetsImgIcon_brandPng,
-	"assets/js/app/treetable/treetable-page.js": assetsJsAppTreetableTreetablePageJs,
-	"assets/js/lib/bootstrap/bootstrap.js": assetsJsLibBootstrapBootstrapJs,
-	"assets/js/lib/bootstrap/bootstrap.min.js": assetsJsLibBootstrapBootstrapMinJs,
-	"assets/js/lib/bootstrap/npm.js": assetsJsLibBootstrapNpmJs,
-	"assets/js/lib/jquery/jquery-1.11.2.js": assetsJsLibJqueryJquery1112Js,
-	"assets/js/lib/jquery/jquery-1.11.2.min.js": assetsJsLibJqueryJquery1112MinJs,
-	"assets/js/lib/jquery/jquery-2.1.3.js": assetsJsLibJqueryJquery213Js,
-	"assets/js/lib/jquery/jquery-2.1.3.min.js": assetsJsLibJqueryJquery213MinJs,
+	"assets/css/bootstrap-combined.min.css":              assetsCssBootstrapCombinedMinCss,
+	"assets/css/bootstrap-theme.css":                     assetsCssBootstrapThemeCss,
+	"assets/css/bootstrap-theme.css.map":                 assetsCssBootstrapThemeCssMap,
+	"assets/css/bootstrap-theme.min.css":                 assetsCssBootstrapThemeMinCss,
+	"assets/css/bootstrap.css":                           assetsCssBootstrapCss,
+	"assets/css/bootstrap.css.map":                       assetsCssBootstrapCssMap,
+	"assets/css/bootstrap.min.css":                       assetsCssBootstrapMinCss,
+	"assets/css/jquery.treetable.css":                    assetsCssJqueryTreetableCss,
+	"assets/css/jquery.treetable.theme.default.css":      assetsCssJqueryTreetableThemeDefaultCss,
+	"assets/fonts/glyphicons-halflings-regular.eot":      assetsFontsGlyphiconsHalflingsRegularEot,
+	"assets/fonts/glyphicons-halflings-regular.svg":      assetsFontsGlyphiconsHalflingsRegularSvg,
+	"assets/fonts/glyphicons-halflings-regular.ttf":      assetsFontsGlyphiconsHalflingsRegularTtf,
+	"assets/fonts/glyphicons-halflings-regular.woff":     assetsFontsGlyphiconsHalflingsRegularWoff,
+	"assets/fonts/glyphicons-halflings-regular.woff2":    assetsFontsGlyphiconsHalflingsRegularWoff2,
+	"assets/img/favicon.ico":                             assetsImgFaviconIco,
+	"assets/img/icon_brand.png":                          assetsImgIcon_brandPng,
+	"assets/js/app/treetable/treetable-page.js":          assetsJsAppTreetableTreetablePageJs,
+	"assets/js/lib/bootstrap/bootstrap.js":               assetsJsLibBootstrapBootstrapJs,
+	"assets/js/lib/bootstrap/bootstrap.min.js":           assetsJsLibBootstrapBootstrapMinJs,
+	"assets/js/lib/bootstrap/npm.js":                     assetsJsLibBootstrapNpmJs,
+	"assets/js/lib/jquery/jquery-1.11.2.js":              assetsJsLibJqueryJquery1112Js,
+	"assets/js/lib/jquery/jquery-1.11.2.min.js":          assetsJsLibJqueryJquery1112MinJs,
+	"assets/js/lib/jquery/jquery-2.1.3.js":               assetsJsLibJqueryJquery213Js,
+	"assets/js/lib/jquery/jquery-2.1.3.min.js":           assetsJsLibJqueryJquery213MinJs,
 	"assets/js/lib/jquery-treetable/jquery.treetable.js": assetsJsLibJqueryTreetableJqueryTreetableJs,
-	"assets/js/lib/require-setup.js": assetsJsLibRequireSetupJs,
-	"assets/js/lib/require.js": assetsJsLibRequireJs,
-	"assets/js/tools/r.js": assetsJsToolsRJs,
+	"assets/js/lib/require-setup.js":                     assetsJsLibRequireSetupJs,
+	"assets/js/lib/require.js":                           assetsJsLibRequireJs,
+	"assets/js/tools/r.js":                               assetsJsToolsRJs,
 }
 
 // AssetDir returns the file names below a certain
@@ -776,28 +776,29 @@ type bintree struct {
 	Func     func() (*asset, error)
 	Children map[string]*bintree
 }
+
 var _bintree = &bintree{nil, map[string]*bintree{
 	"assets": &bintree{nil, map[string]*bintree{
 		"css": &bintree{nil, map[string]*bintree{
-			"bootstrap-combined.min.css": &bintree{assetsCssBootstrapCombinedMinCss, map[string]*bintree{}},
-			"bootstrap-theme.css": &bintree{assetsCssBootstrapThemeCss, map[string]*bintree{}},
-			"bootstrap-theme.css.map": &bintree{assetsCssBootstrapThemeCssMap, map[string]*bintree{}},
-			"bootstrap-theme.min.css": &bintree{assetsCssBootstrapThemeMinCss, map[string]*bintree{}},
-			"bootstrap.css": &bintree{assetsCssBootstrapCss, map[string]*bintree{}},
-			"bootstrap.css.map": &bintree{assetsCssBootstrapCssMap, map[string]*bintree{}},
-			"bootstrap.min.css": &bintree{assetsCssBootstrapMinCss, map[string]*bintree{}},
-			"jquery.treetable.css": &bintree{assetsCssJqueryTreetableCss, map[string]*bintree{}},
+			"bootstrap-combined.min.css":         &bintree{assetsCssBootstrapCombinedMinCss, map[string]*bintree{}},
+			"bootstrap-theme.css":                &bintree{assetsCssBootstrapThemeCss, map[string]*bintree{}},
+			"bootstrap-theme.css.map":            &bintree{assetsCssBootstrapThemeCssMap, map[string]*bintree{}},
+			"bootstrap-theme.min.css":            &bintree{assetsCssBootstrapThemeMinCss, map[string]*bintree{}},
+			"bootstrap.css":                      &bintree{assetsCssBootstrapCss, map[string]*bintree{}},
+			"bootstrap.css.map":                  &bintree{assetsCssBootstrapCssMap, map[string]*bintree{}},
+			"bootstrap.min.css":                  &bintree{assetsCssBootstrapMinCss, map[string]*bintree{}},
+			"jquery.treetable.css":               &bintree{assetsCssJqueryTreetableCss, map[string]*bintree{}},
 			"jquery.treetable.theme.default.css": &bintree{assetsCssJqueryTreetableThemeDefaultCss, map[string]*bintree{}},
 		}},
 		"fonts": &bintree{nil, map[string]*bintree{
-			"glyphicons-halflings-regular.eot": &bintree{assetsFontsGlyphiconsHalflingsRegularEot, map[string]*bintree{}},
-			"glyphicons-halflings-regular.svg": &bintree{assetsFontsGlyphiconsHalflingsRegularSvg, map[string]*bintree{}},
-			"glyphicons-halflings-regular.ttf": &bintree{assetsFontsGlyphiconsHalflingsRegularTtf, map[string]*bintree{}},
-			"glyphicons-halflings-regular.woff": &bintree{assetsFontsGlyphiconsHalflingsRegularWoff, map[string]*bintree{}},
+			"glyphicons-halflings-regular.eot":   &bintree{assetsFontsGlyphiconsHalflingsRegularEot, map[string]*bintree{}},
+			"glyphicons-halflings-regular.svg":   &bintree{assetsFontsGlyphiconsHalflingsRegularSvg, map[string]*bintree{}},
+			"glyphicons-halflings-regular.ttf":   &bintree{assetsFontsGlyphiconsHalflingsRegularTtf, map[string]*bintree{}},
+			"glyphicons-halflings-regular.woff":  &bintree{assetsFontsGlyphiconsHalflingsRegularWoff, map[string]*bintree{}},
 			"glyphicons-halflings-regular.woff2": &bintree{assetsFontsGlyphiconsHalflingsRegularWoff2, map[string]*bintree{}},
 		}},
 		"img": &bintree{nil, map[string]*bintree{
-			"favicon.ico": &bintree{assetsImgFaviconIco, map[string]*bintree{}},
+			"favicon.ico":    &bintree{assetsImgFaviconIco, map[string]*bintree{}},
 			"icon_brand.png": &bintree{assetsImgIcon_brandPng, map[string]*bintree{}},
 		}},
 		"js": &bintree{nil, map[string]*bintree{
@@ -808,21 +809,21 @@ var _bintree = &bintree{nil, map[string]*bintree{
 			}},
 			"lib": &bintree{nil, map[string]*bintree{
 				"bootstrap": &bintree{nil, map[string]*bintree{
-					"bootstrap.js": &bintree{assetsJsLibBootstrapBootstrapJs, map[string]*bintree{}},
+					"bootstrap.js":     &bintree{assetsJsLibBootstrapBootstrapJs, map[string]*bintree{}},
 					"bootstrap.min.js": &bintree{assetsJsLibBootstrapBootstrapMinJs, map[string]*bintree{}},
-					"npm.js": &bintree{assetsJsLibBootstrapNpmJs, map[string]*bintree{}},
+					"npm.js":           &bintree{assetsJsLibBootstrapNpmJs, map[string]*bintree{}},
 				}},
 				"jquery": &bintree{nil, map[string]*bintree{
-					"jquery-1.11.2.js": &bintree{assetsJsLibJqueryJquery1112Js, map[string]*bintree{}},
+					"jquery-1.11.2.js":     &bintree{assetsJsLibJqueryJquery1112Js, map[string]*bintree{}},
 					"jquery-1.11.2.min.js": &bintree{assetsJsLibJqueryJquery1112MinJs, map[string]*bintree{}},
-					"jquery-2.1.3.js": &bintree{assetsJsLibJqueryJquery213Js, map[string]*bintree{}},
-					"jquery-2.1.3.min.js": &bintree{assetsJsLibJqueryJquery213MinJs, map[string]*bintree{}},
+					"jquery-2.1.3.js":      &bintree{assetsJsLibJqueryJquery213Js, map[string]*bintree{}},
+					"jquery-2.1.3.min.js":  &bintree{assetsJsLibJqueryJquery213MinJs, map[string]*bintree{}},
 				}},
 				"jquery-treetable": &bintree{nil, map[string]*bintree{
 					"jquery.treetable.js": &bintree{assetsJsLibJqueryTreetableJqueryTreetableJs, map[string]*bintree{}},
 				}},
 				"require-setup.js": &bintree{assetsJsLibRequireSetupJs, map[string]*bintree{}},
-				"require.js": &bintree{assetsJsLibRequireJs, map[string]*bintree{}},
+				"require.js":       &bintree{assetsJsLibRequireJs, map[string]*bintree{}},
 			}},
 			"tools": &bintree{nil, map[string]*bintree{
 				"r.js": &bintree{assetsJsToolsRJs, map[string]*bintree{}},
@@ -877,4 +878,3 @@ func _filePath(dir, name string) string {
 	cannonicalName := strings.Replace(name, "\\", "/", -1)
 	return filepath.Join(append([]string{dir}, strings.Split(cannonicalName, "/")...)...)
 }
-

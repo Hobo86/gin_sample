@@ -476,23 +476,23 @@ func AssetNames() []string {
 
 // _bindata is a table, holding each asset generator, mapped to its name.
 var _bindata = map[string]func() (*asset, error){
-	"templates/40x.tmpl": templates40xTmpl,
-	"templates/50x.tmpl": templates50xTmpl,
-	"templates/includes/base.tmpl": templatesIncludesBaseTmpl,
-	"templates/layout.tmpl": templatesLayoutTmpl,
-	"templates/layouts/about.tmpl": templatesLayoutsAboutTmpl,
-	"templates/layouts/demo.tmpl": templatesLayoutsDemoTmpl,
-	"templates/layouts/home.tmpl": templatesLayoutsHomeTmpl,
-	"templates/layouts/index.tmpl": templatesLayoutsIndexTmpl,
-	"templates/layouts/login.tmpl": templatesLayoutsLoginTmpl,
+	"templates/40x.tmpl":              templates40xTmpl,
+	"templates/50x.tmpl":              templates50xTmpl,
+	"templates/includes/base.tmpl":    templatesIncludesBaseTmpl,
+	"templates/layout.tmpl":           templatesLayoutTmpl,
+	"templates/layouts/about.tmpl":    templatesLayoutsAboutTmpl,
+	"templates/layouts/demo.tmpl":     templatesLayoutsDemoTmpl,
+	"templates/layouts/home.tmpl":     templatesLayoutsHomeTmpl,
+	"templates/layouts/index.tmpl":    templatesLayoutsIndexTmpl,
+	"templates/layouts/login.tmpl":    templatesLayoutsLoginTmpl,
 	"templates/layouts/register.tmpl": templatesLayoutsRegisterTmpl,
-	"templates/layouts/user.tmpl": templatesLayoutsUserTmpl,
-	"templates/www/about.tmpl": templatesWwwAboutTmpl,
-	"templates/www/demo.tmpl": templatesWwwDemoTmpl,
-	"templates/www/home.tmpl": templatesWwwHomeTmpl,
-	"templates/www/login.tmpl": templatesWwwLoginTmpl,
-	"templates/www/regist.tmpl": templatesWwwRegistTmpl,
-	"templates/www/user.tmpl": templatesWwwUserTmpl,
+	"templates/layouts/user.tmpl":     templatesLayoutsUserTmpl,
+	"templates/www/about.tmpl":        templatesWwwAboutTmpl,
+	"templates/www/demo.tmpl":         templatesWwwDemoTmpl,
+	"templates/www/home.tmpl":         templatesWwwHomeTmpl,
+	"templates/www/login.tmpl":        templatesWwwLoginTmpl,
+	"templates/www/regist.tmpl":       templatesWwwRegistTmpl,
+	"templates/www/user.tmpl":         templatesWwwUserTmpl,
 }
 
 // AssetDir returns the file names below a certain
@@ -534,6 +534,7 @@ type bintree struct {
 	Func     func() (*asset, error)
 	Children map[string]*bintree
 }
+
 var _bintree = &bintree{nil, map[string]*bintree{
 	"templates": &bintree{nil, map[string]*bintree{
 		"40x.tmpl": &bintree{templates40xTmpl, map[string]*bintree{}},
@@ -543,21 +544,21 @@ var _bintree = &bintree{nil, map[string]*bintree{
 		}},
 		"layout.tmpl": &bintree{templatesLayoutTmpl, map[string]*bintree{}},
 		"layouts": &bintree{nil, map[string]*bintree{
-			"about.tmpl": &bintree{templatesLayoutsAboutTmpl, map[string]*bintree{}},
-			"demo.tmpl": &bintree{templatesLayoutsDemoTmpl, map[string]*bintree{}},
-			"home.tmpl": &bintree{templatesLayoutsHomeTmpl, map[string]*bintree{}},
-			"index.tmpl": &bintree{templatesLayoutsIndexTmpl, map[string]*bintree{}},
-			"login.tmpl": &bintree{templatesLayoutsLoginTmpl, map[string]*bintree{}},
+			"about.tmpl":    &bintree{templatesLayoutsAboutTmpl, map[string]*bintree{}},
+			"demo.tmpl":     &bintree{templatesLayoutsDemoTmpl, map[string]*bintree{}},
+			"home.tmpl":     &bintree{templatesLayoutsHomeTmpl, map[string]*bintree{}},
+			"index.tmpl":    &bintree{templatesLayoutsIndexTmpl, map[string]*bintree{}},
+			"login.tmpl":    &bintree{templatesLayoutsLoginTmpl, map[string]*bintree{}},
 			"register.tmpl": &bintree{templatesLayoutsRegisterTmpl, map[string]*bintree{}},
-			"user.tmpl": &bintree{templatesLayoutsUserTmpl, map[string]*bintree{}},
+			"user.tmpl":     &bintree{templatesLayoutsUserTmpl, map[string]*bintree{}},
 		}},
 		"www": &bintree{nil, map[string]*bintree{
-			"about.tmpl": &bintree{templatesWwwAboutTmpl, map[string]*bintree{}},
-			"demo.tmpl": &bintree{templatesWwwDemoTmpl, map[string]*bintree{}},
-			"home.tmpl": &bintree{templatesWwwHomeTmpl, map[string]*bintree{}},
-			"login.tmpl": &bintree{templatesWwwLoginTmpl, map[string]*bintree{}},
+			"about.tmpl":  &bintree{templatesWwwAboutTmpl, map[string]*bintree{}},
+			"demo.tmpl":   &bintree{templatesWwwDemoTmpl, map[string]*bintree{}},
+			"home.tmpl":   &bintree{templatesWwwHomeTmpl, map[string]*bintree{}},
+			"login.tmpl":  &bintree{templatesWwwLoginTmpl, map[string]*bintree{}},
 			"regist.tmpl": &bintree{templatesWwwRegistTmpl, map[string]*bintree{}},
-			"user.tmpl": &bintree{templatesWwwUserTmpl, map[string]*bintree{}},
+			"user.tmpl":   &bintree{templatesWwwUserTmpl, map[string]*bintree{}},
 		}},
 	}},
 }}
@@ -608,4 +609,3 @@ func _filePath(dir, name string) string {
 	cannonicalName := strings.Replace(name, "\\", "/", -1)
 	return filepath.Join(append([]string{dir}, strings.Split(cannonicalName, "/")...)...)
 }
-

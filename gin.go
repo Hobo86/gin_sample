@@ -16,7 +16,7 @@ import (
 )
 
 const (
-	BINDATA = false
+	BINDATA = true
 )
 
 func main() {
