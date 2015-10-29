@@ -17,7 +17,7 @@ func HomeHandler(c *gin.Context) {
 	model := models.Default(c)
 	u := model.GetUserById(id)
 
-	c.HTML(http.StatusOK, "home.tmpl", gin.H{
+	c.HTML(http.StatusOK, "www/home", gin.H{
 		"title": "Home",
 		"user":  u,
 	})

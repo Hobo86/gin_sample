@@ -26,7 +26,7 @@ func LoginHandler(c *gin.Context) {
 		return
 	}
 
-	c.HTML(http.StatusOK, "login.tmpl", gin.H{
+	c.HTML(http.StatusOK, "www/login", gin.H{
 		"title":         "Login",
 		"redirectParam": auth.RedirectParam,
 		"redirect":      redirect,
@@ -82,7 +82,7 @@ func RegisterHandler(c *gin.Context) {
 		return
 	}
 
-	c.HTML(http.StatusOK, "register.tmpl", gin.H{
+	c.HTML(http.StatusOK, "www/register", gin.H{
 		"title":         "Register",
 		"redirectParam": auth.RedirectParam,
 		"redirect":      redirect,

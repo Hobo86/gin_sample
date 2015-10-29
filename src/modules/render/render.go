@@ -15,12 +15,14 @@ import (
 func LoadTemplates(templatesDir string) multitemplate.Render {
 	r := multitemplate.New()
 
-	layouts, err := filepath.Glob(templatesDir + "/layouts/*.tmpl")
+	layoutDir := templatesDir + "/layouts/"
+	layouts, err := filepath.Glob(layoutDir + "*/*.tmpl")
 	if err != nil {
 		panic(err.Error())
 	}
 
-	includes, err := filepath.Glob(templatesDir + "/includes/*.tmpl")
+	includeDir := templatesDir + "/includes/"
+	includes, err := filepath.Glob(includeDir + "*.tmpl")
 	if err != nil {
 		panic(err.Error())
 	}
@@ -29,8 +31,10 @@ func LoadTemplates(templatesDir string) multitemplate.Render {
 	for _, layout := range layouts {
 		files := append(includes, layout)
 		tmpl := template.Must(template.ParseFiles(files...))
-		// log.Printf(filepath.Base(layout))
-		r.Add(filepath.Base(layout), tmpl)
+		tmplName := strings.TrimPrefix(layout, layoutDir)
+		tmplName = strings.TrimSuffix(tmplName, ".tmpl")
+		log.Printf("Tmpl add " + tmplName)
+		r.Add(tmplName, tmpl)
 	}
 	return r
 }
@@ -39,7 +43,7 @@ func LoadBindataTemplates(templatesDir string) multitemplate.Render {
 	r := multitemplate.New()
 
 	layoutDir := templatesDir + "/layouts"
-	layoutFiels, err := templates.AssetDir(layoutDir)
+	layoutFiels, err := templates.AssetDir(layoutDir + "/www")
 	if err != nil {
 		panic(err.Error())
 	}
@@ -51,7 +55,7 @@ func LoadBindataTemplates(templatesDir string) multitemplate.Render {
 	}
 
 	// 过滤非.tmpl后缀模板
-	layouts, err := tmplsFilter(layoutFiels, layoutDir)
+	layouts, err := tmplsFilter(layoutFiels, layoutDir+"/www")
 	if err != nil {
 		panic(err.Error())
 	}
@@ -64,8 +68,10 @@ func LoadBindataTemplates(templatesDir string) multitemplate.Render {
 	for _, layout := range layouts {
 		files := append(includes, layout)
 		tmpl := template.Must(ParseBindataFiles(files...))
-		// log.Printf(filepath.Base(layout))
-		r.Add(filepath.Base(layout), tmpl)
+		tmplName := strings.TrimPrefix(layout, layoutDir+"/")
+		tmplName = strings.TrimSuffix(tmplName, ".tmpl")
+		log.Printf("Tmpl add " + tmplName)
+		r.Add(tmplName, tmpl)
 	}
 	return r
 }
@@ -74,8 +80,9 @@ func tmplsFilter(files []string, dir string) ([]string, error) {
 	var tmpls []string
 	for _, file := range files {
 		if strings.HasSuffix(file, ".tmpl") {
-			tmpls = append(tmpls, dir+"/"+file)
+
 		}
+		tmpls = append(tmpls, dir+"/"+file)
 	}
 	return tmpls, nil
 }

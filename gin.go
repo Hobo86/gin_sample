@@ -37,7 +37,7 @@ func main() {
 	if BINDATA {
 		r.HTMLRender = render.LoadBindataTemplates("templates")
 	} else {
-		r.HTMLRender = render.LoadTemplates("./templates")
+		r.HTMLRender = render.LoadTemplates("templates")
 	}
 
 	// 模型
