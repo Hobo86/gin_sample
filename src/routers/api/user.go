@@ -3,11 +3,13 @@ package api
 import (
 	"net/http"
 	"strconv"
+	. "time"
 
 	"github.com/gin-gonic/gin"
 	// "github.com/jinzhu/gorm"
 
 	"models"
+	"modules/cache"
 )
 
 func UserHandler(c *gin.Context) {
@@ -20,9 +22,19 @@ func UserHandler(c *gin.Context) {
 	model := models.Default(c)
 	u := model.GetUserById(id)
 
+	value := -1
+	cacheStore := cache.Default(c)
+	if id == 1 {
+		value = 0
+		// cacheStore.Set("userId", 1, cache.FOREVER)
+	} else {
+		cacheStore.Get("userId", &value)
+	}
+
 	c.JSON(http.StatusOK, gin.H{
 		"title": "User",
 		"user":  u,
+		"value": value,
 	})
 }
 

@@ -1,8 +1,9 @@
 package main
 
 import (
-	// "log"
+	"time"
 
+	gin_cache "github.com/gin-gonic/contrib/cache"
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/olebedev/staticbin"
@@ -10,6 +11,7 @@ import (
 	"assets"
 	"models"
 	"modules/auth"
+	"modules/cache"
 	"modules/render"
 	"routers/api"
 	"routers/www"
@@ -44,8 +46,13 @@ func main() {
 	model := models.Model()
 	r.Use(model)
 
+	// Session
 	store := sessions.NewCookieStore([]byte("secret"))
 	r.Use(sessions.Sessions("mysession", store))
+
+	// Cache
+	cacheStore := gin_cache.NewInMemoryStore(time.Second)
+	r.Use(cache.Cache(cacheStore))
 
 	r.Use(auth.Auth(models.GenerateAnonymousUser))
 
