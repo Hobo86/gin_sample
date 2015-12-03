@@ -20,8 +20,8 @@ func UserHandler(c *gin.Context) {
 	model := models.Default(c)
 	u := model.GetUserById(id)
 
-	c.HTML(http.StatusOK, "www/user", gin.H{
+	c.HTML(http.StatusOK, "www/user", H(c, gin.H{
 		"title": "User",
 		"user":  u,
-	})
+	}))
 }

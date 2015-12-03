@@ -26,7 +26,7 @@ func UserHandler(c *gin.Context) {
 	cacheStore := cache.Default(c)
 	if id == 1 {
 		value = 0
-		// cacheStore.Set("userId", 1, cache.FOREVER)
+		cacheStore.Set("userId", 1, Minute)
 	} else {
 		cacheStore.Get("userId", &value)
 	}

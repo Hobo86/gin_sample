@@ -9,6 +9,7 @@ import (
 	"github.com/olebedev/staticbin"
 
 	"assets"
+	"conf"
 	"models"
 	"modules/auth"
 	"modules/cache"
@@ -18,7 +19,9 @@ import (
 )
 
 const (
-	BINDATA = true
+	BINDATA   = true
+	MEMCACHED = true
+	REDIS     = true
 )
 
 func main() {
@@ -47,12 +50,25 @@ func main() {
 	r.Use(model)
 
 	// Session
-	store := sessions.NewCookieStore([]byte("secret"))
-	r.Use(sessions.Sessions("mysession", store))
+	if REDIS {
+		store, err := sessions.NewRedisStore(10, "tcp", conf.REDIS_SERVER, conf.REDIS_PWD, []byte("secret"))
+		if err != nil {
+			panic(err)
+		}
+		r.Use(sessions.Sessions("mysession", store))
+	} else {
+		store := sessions.NewCookieStore([]byte("secret"))
+		r.Use(sessions.Sessions("mysession", store))
+	}
 
 	// Cache
-	cacheStore := gin_cache.NewInMemoryStore(time.Second)
-	r.Use(cache.Cache(cacheStore))
+	if MEMCACHED {
+		cacheStore := gin_cache.NewMemcachedStore([]string{conf.MEMCACHED_SERVER}, time.Hour)
+		r.Use(cache.Cache(cacheStore))
+	} else {
+		cacheStore := gin_cache.NewInMemoryStore(time.Hour)
+		r.Use(cache.Cache(cacheStore))
+	}
 
 	r.Use(auth.Auth(models.GenerateAnonymousUser))
 

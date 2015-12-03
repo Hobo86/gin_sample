@@ -43,9 +43,25 @@ func LoadBindataTemplates(templatesDir string) multitemplate.Render {
 	r := multitemplate.New()
 
 	layoutDir := templatesDir + "/layouts"
-	layoutFiels, err := templates.AssetDir(layoutDir + "/www")
+	layoutDirs, err := templates.AssetDir(layoutDir)
 	if err != nil {
 		panic(err.Error())
+	}
+
+	var layouts []string
+	for _, dir := range layoutDirs {
+		files, err := templates.AssetDir(layoutDir + "/" + dir)
+		if err != nil {
+			panic(err.Error())
+		}
+
+		// 过滤非.tmpl后缀模板
+		layoutFiels, err := tmplsFilter(files, layoutDir+"/"+dir)
+		if err != nil {
+			panic(err.Error())
+		}
+
+		layouts = append(layouts, layoutFiels...)
 	}
 
 	includeDir := templatesDir + "/includes"
@@ -53,12 +69,7 @@ func LoadBindataTemplates(templatesDir string) multitemplate.Render {
 	if err != nil {
 		panic(err.Error())
 	}
-
 	// 过滤非.tmpl后缀模板
-	layouts, err := tmplsFilter(layoutFiels, layoutDir+"/www")
-	if err != nil {
-		panic(err.Error())
-	}
 	includes, err := tmplsFilter(includeFiels, includeDir)
 	if err != nil {
 		panic(err.Error())
@@ -76,13 +87,13 @@ func LoadBindataTemplates(templatesDir string) multitemplate.Render {
 	return r
 }
 
+// 过滤非tmpl后缀模板文件
 func tmplsFilter(files []string, dir string) ([]string, error) {
 	var tmpls []string
 	for _, file := range files {
 		if strings.HasSuffix(file, ".tmpl") {
-
+			tmpls = append(tmpls, dir+"/"+file)
 		}
-		tmpls = append(tmpls, dir+"/"+file)
 	}
 	return tmpls, nil
 }

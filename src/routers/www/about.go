@@ -7,7 +7,7 @@ import (
 )
 
 func AboutHandler(c *gin.Context) {
-	c.HTML(http.StatusOK, "www/about", gin.H{
+	c.HTML(http.StatusOK, "www/about", H(c, gin.H{
 		"title": "About",
-	})
+	}))
 }

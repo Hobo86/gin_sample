@@ -7,7 +7,7 @@ import (
 )
 
 func DemoHandler(c *gin.Context) {
-	c.HTML(http.StatusOK, "www/demo", gin.H{
+	c.HTML(http.StatusOK, "www/demo", H(c, gin.H{
 		"title": "Demo",
-	})
+	}))
 }

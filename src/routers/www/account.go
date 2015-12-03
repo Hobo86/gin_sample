@@ -26,11 +26,11 @@ func LoginHandler(c *gin.Context) {
 		return
 	}
 
-	c.HTML(http.StatusOK, "www/login", gin.H{
+	c.HTML(http.StatusOK, "www/login", H(c, gin.H{
 		"title":         "Login",
 		"redirectParam": auth.RedirectParam,
 		"redirect":      redirect,
-	})
+	}))
 }
 
 func LoginPostHandler(c *gin.Context) {
@@ -82,11 +82,11 @@ func RegisterHandler(c *gin.Context) {
 		return
 	}
 
-	c.HTML(http.StatusOK, "www/register", gin.H{
+	c.HTML(http.StatusOK, "www/register", H(c, gin.H{
 		"title":         "Register",
 		"redirectParam": auth.RedirectParam,
 		"redirect":      redirect,
-	})
+	}))
 }
 
 func RegisterPostHandler(c *gin.Context) {
