@@ -9,10 +9,20 @@ import (
 
 	"github.com/gin-gonic/contrib/renders/multitemplate"
 
+	"conf"
 	"templates"
 )
 
-func LoadTemplates(templatesDir string) multitemplate.Render {
+func LoadTemplates() multitemplate.Render {
+	switch conf.TMPL_TYPE {
+	case conf.BINDATA:
+		return loadTemplatesBindata(conf.TMPL_DIR)
+	default:
+		return loadTemplatesDefault(conf.TMPL_DIR)
+	}
+}
+
+func loadTemplatesDefault(templatesDir string) multitemplate.Render {
 	r := multitemplate.New()
 
 	layoutDir := templatesDir + "/layouts/"
@@ -39,7 +49,7 @@ func LoadTemplates(templatesDir string) multitemplate.Render {
 	return r
 }
 
-func LoadBindataTemplates(templatesDir string) multitemplate.Render {
+func loadTemplatesBindata(templatesDir string) multitemplate.Render {
 	r := multitemplate.New()
 
 	layoutDir := templatesDir + "/layouts"
@@ -78,7 +88,7 @@ func LoadBindataTemplates(templatesDir string) multitemplate.Render {
 	// Generate our templates map from our layouts/ and includes/ directories
 	for _, layout := range layouts {
 		files := append(includes, layout)
-		tmpl := template.Must(ParseBindataFiles(files...))
+		tmpl := template.Must(parseBindataFiles(files...))
 		tmplName := strings.TrimPrefix(layout, layoutDir+"/")
 		tmplName = strings.TrimSuffix(tmplName, ".tmpl")
 		log.Printf("Tmpl add " + tmplName)
@@ -98,14 +108,10 @@ func tmplsFilter(files []string, dir string) ([]string, error) {
 	return tmpls, nil
 }
 
-func ParseBindataFiles(filenames ...string) (*template.Template, error) {
-	var t *template.Template
-	return parseBindataFiles(t, filenames...)
-}
-
 // parseFiles is the helper for the method and function. If the argument
 // template is nil, it is created from the first file.
-func parseBindataFiles(t *template.Template, filenames ...string) (*template.Template, error) {
+func parseBindataFiles(filenames ...string) (*template.Template, error) {
+	var t *template.Template
 	if len(filenames) == 0 {
 		// Not really a problem, but be consistent.
 		return nil, fmt.Errorf("html/template: no files named in call to ParseFiles")

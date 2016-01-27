@@ -32,9 +32,19 @@ func UserHandler(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"title": "User",
-		"user":  u,
-		"value": value,
+		"title":      "User",
+		"user":       u,
+		"value":      value,
+		"host":       c.Request.Host,
+		"referer":    c.Request.Referer(),
+		"method":     c.Request.Method,
+		"RequestURI": c.Request.RequestURI,
+		"RemoteAddr": c.Request.RemoteAddr,
+		"url":        c.Request.URL.String(),
+		"path":       c.Request.URL.Path,
+		"query":      c.Request.URL.Query().Encode(),
+		"uri":        c.Request.URL.RequestURI(),
+		"rawquery":   c.Request.URL.RawQuery,
 	})
 }
 

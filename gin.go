@@ -1,10 +1,6 @@
 package main
 
 import (
-	"time"
-
-	gin_cache "github.com/gin-gonic/contrib/cache"
-	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/olebedev/staticbin"
 
@@ -14,14 +10,9 @@ import (
 	"modules/auth"
 	"modules/cache"
 	"modules/render"
+	"modules/sessions"
 	"routers/api"
 	"routers/www"
-)
-
-const (
-	BINDATA   = true
-	MEMCACHED = true
-	REDIS     = true
 )
 
 func main() {
@@ -30,46 +21,29 @@ func main() {
 	r := gin.Default()
 
 	// 静态资源
-	if BINDATA {
+	switch conf.STATIC_TYPE {
+	case conf.BINDATA:
 		r.Use(staticbin.Static(assets.Asset, staticbin.Options{
 			Dir: "/",
 		}))
-	} else {
+	default:
 		r.Static("/assets", "./assets")
 	}
 
 	// 模板
-	if BINDATA {
-		r.HTMLRender = render.LoadBindataTemplates("templates")
-	} else {
-		r.HTMLRender = render.LoadTemplates("templates")
-	}
+	r.HTMLRender = render.LoadTemplates()
 
 	// 模型
 	model := models.Model()
 	r.Use(model)
 
 	// Session
-	if REDIS {
-		store, err := sessions.NewRedisStore(10, "tcp", conf.REDIS_SERVER, conf.REDIS_PWD, []byte("secret"))
-		if err != nil {
-			panic(err)
-		}
-		r.Use(sessions.Sessions("mysession", store))
-	} else {
-		store := sessions.NewCookieStore([]byte("secret"))
-		r.Use(sessions.Sessions("mysession", store))
-	}
+	r.Use(sessions.Sessions())
 
 	// Cache
-	if MEMCACHED {
-		cacheStore := gin_cache.NewMemcachedStore([]string{conf.MEMCACHED_SERVER}, time.Hour)
-		r.Use(cache.Cache(cacheStore))
-	} else {
-		cacheStore := gin_cache.NewInMemoryStore(time.Hour)
-		r.Use(cache.Cache(cacheStore))
-	}
+	r.Use(cache.Cache())
 
+	// Auth
 	r.Use(auth.Auth(models.GenerateAnonymousUser))
 
 	r.GET("", www.HomeHandler)
