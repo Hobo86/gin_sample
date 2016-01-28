@@ -55,10 +55,10 @@ github.com/olebedev/staticbin
 conf<br>
 
 ###缓存
+	查询缓存<br>
+	SQL解析缓存<br>
 - [x] Memcached<br>
 - [x] Memory<br>
-查询缓存<br>
-SQL解析缓存<br>
 
 ###Session
 - [x] Cookie<br>
@@ -67,40 +67,41 @@ SQL解析缓存<br>
 ###FLASH
 
 ###权限
-Auth<br>
-AuthApi<br>
+	Auth<br>
+	AuthApi<br>
 
 ###模型
 ####DB
-多连接及切换
+	多连接及切换
+
 ####ORM
-- [x] gorm<br>
 	CURD<br>
 	关联<br>
 	事务<br>
 	form绑定<br>
 	自动验证<br>
 	分页<br>
+- [x] gorm<br>
 
 ###模板
-- [x] PONGO2<br>
 	模板布局<br>
 	公共参数<br>
 	模板替换<br>
+- [x] PONGO2<br>
 
 ###日志
-- [x] 调试日志<br>
 	日志分级
+- [x] 调试日志<br>
 
 ###安全
-SQL注入<br>
-XSS<br>
-表单令牌<br>
-验证码<br>
-	
+	SQL注入<br>
+	XSS<br>
+	表单令牌<br>
+	验证码<br>
+
 ###部署
-模块部署<br>
-域名部署<br>
+	模块部署<br>
+	域名部署<br>
 
 ###多语言
 
