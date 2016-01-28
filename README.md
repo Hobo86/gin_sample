@@ -56,15 +56,14 @@ github.com/olebedev/staticbin
 	conf
 
 ##缓存
-- [x] Memcached
-- [x] Memory
-
+- [x] Memcached<br>
+- [x] Memory<br>
 	查询缓存
 	SQL解析缓存
 
 ##Session
-- [x] Cookie
-- [x] Redis
+- [x] Cookie<br>
+- [x] Redis<br>
 
 ##FLASH
 	
@@ -75,7 +74,7 @@ github.com/olebedev/staticbin
 ### DB
 	多连接及切换
 ### ORM
-	gorm
+- [x] gorm<br>
 	CURD
 	关联
 	事务
@@ -83,14 +82,13 @@ github.com/olebedev/staticbin
 	自动验证
 	分页
 ##模板
-- [x] PONGO2
-
+- [x] PONGO2<br>
 	模板布局
 	公共参数
 	模板替换
 
 ##日志
-- [x] 调试日志
+- [x] 调试日志<br>
 
 日志分级
 
