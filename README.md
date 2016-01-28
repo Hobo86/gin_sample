@@ -53,7 +53,7 @@ github.com/olebedev/staticbin
 
 #框架功能
 ##配置
-- [x] conf
+	conf
 
 ##缓存
 - [x] Memcached
@@ -61,7 +61,7 @@ github.com/olebedev/staticbin
 
 	查询缓存
 	SQL解析缓存
-	
+
 ##Session
 - [x] Cookie
 - [x] Redis
@@ -75,6 +75,7 @@ github.com/olebedev/staticbin
 ### DB
 	多连接及切换
 ### ORM
+	gorm
 	CURD
 	关联
 	事务
@@ -87,7 +88,11 @@ github.com/olebedev/staticbin
 	模板布局
 	公共参数
 	模板替换
+
 ##日志
+- [x] 调试日志
+
+日志分级
 
 ##安全
 	SQL注入
