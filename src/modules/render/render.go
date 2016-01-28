@@ -3,7 +3,6 @@ package render
 import (
 	"fmt"
 	"html/template"
-	"log"
 	"path/filepath"
 	"strings"
 
@@ -11,6 +10,8 @@ import (
 
 	"conf"
 	"templates"
+
+	"modules/log"
 )
 
 func LoadTemplates() multitemplate.Render {
@@ -43,7 +44,7 @@ func loadTemplatesDefault(templatesDir string) multitemplate.Render {
 		tmpl := template.Must(template.ParseFiles(files...))
 		tmplName := strings.TrimPrefix(layout, layoutDir)
 		tmplName = strings.TrimSuffix(tmplName, ".tmpl")
-		log.Printf("Tmpl add " + tmplName)
+		log.DebugPrint("Tmpl add " + tmplName)
 		r.Add(tmplName, tmpl)
 	}
 	return r
@@ -91,7 +92,7 @@ func loadTemplatesBindata(templatesDir string) multitemplate.Render {
 		tmpl := template.Must(parseBindataFiles(files...))
 		tmplName := strings.TrimPrefix(layout, layoutDir+"/")
 		tmplName = strings.TrimSuffix(tmplName, ".tmpl")
-		log.Printf("Tmpl add " + tmplName)
+		log.DebugPrint("Tmpl add " + tmplName)
 		r.Add(tmplName, tmpl)
 	}
 	return r

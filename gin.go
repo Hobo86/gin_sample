@@ -16,7 +16,9 @@ import (
 )
 
 func main() {
-	// gin.SetMode(gin.ReleaseMode)
+	if conf.GIN_RELEASE_MODE {
+		gin.SetMode(gin.ReleaseMode)
+	}
 
 	r := gin.Default()
 
@@ -46,6 +48,7 @@ func main() {
 	// Auth
 	r.Use(auth.Auth(models.GenerateAnonymousUser))
 
+	// Routers
 	r.GET("", www.HomeHandler)
 	r.GET("/login", www.LoginHandler)
 	r.GET("/register", www.RegisterHandler)

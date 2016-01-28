@@ -3,6 +3,9 @@ package conf
 import ()
 
 const (
+	// Gin
+	GIN_RELEASE_MODE = false
+
 	// Session
 	SESSION_STORE = "REDIS"
 
