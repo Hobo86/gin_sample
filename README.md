@@ -54,6 +54,7 @@ github.com/olebedev/staticbin
 #框架功能
 ##配置
 - [x] conf
+
 ##缓存
 - [x] Memcached
 - [x] Memory
@@ -62,6 +63,7 @@ github.com/olebedev/staticbin
 ##Session
 - [x] Cookie
 - [x] Redis
+
 ##FLASH
 	
 ##权限
@@ -78,9 +80,10 @@ github.com/olebedev/staticbin
 	自动验证
 	分页
 ##模板
+- [x] PONGO2
+
 	模板布局
 	公共参数
-- [x] PONGO2
 	模板替换
 ##日志
 
