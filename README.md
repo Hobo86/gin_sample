@@ -58,8 +58,10 @@ github.com/olebedev/staticbin
 ##缓存
 - [x] Memcached
 - [x] Memory
+
 	查询缓存
 	SQL解析缓存
+	
 ##Session
 - [x] Cookie
 - [x] Redis
