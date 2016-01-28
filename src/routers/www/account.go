@@ -26,11 +26,12 @@ func LoginHandler(c *gin.Context) {
 		return
 	}
 
-	c.HTML(http.StatusOK, "www/login", H(c, gin.H{
+	c.Set("tmpl", "www/login")
+	c.Set("data", map[string]interface{}{
 		"title":         "Login",
 		"redirectParam": auth.RedirectParam,
 		"redirect":      redirect,
-	}))
+	})
 }
 
 func LoginPostHandler(c *gin.Context) {
@@ -82,11 +83,12 @@ func RegisterHandler(c *gin.Context) {
 		return
 	}
 
-	c.HTML(http.StatusOK, "www/register", H(c, gin.H{
+	c.Set("tmpl", "www/register")
+	c.Set("data", map[string]interface{}{
 		"title":         "Register",
 		"redirectParam": auth.RedirectParam,
 		"redirect":      redirect,
-	}))
+	})
 }
 
 func RegisterPostHandler(c *gin.Context) {

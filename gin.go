@@ -34,6 +34,7 @@ func main() {
 
 	// 模板
 	r.HTMLRender = render.LoadTemplates()
+	r.Use(render.Render())
 
 	// 模型
 	model := models.Model()

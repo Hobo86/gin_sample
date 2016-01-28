@@ -1,21 +1,102 @@
 package render
 
 import (
+	"errors"
 	"fmt"
 	"html/template"
+	"net/http"
 	"path/filepath"
 	"strings"
 
 	"github.com/gin-gonic/contrib/renders/multitemplate"
+	"github.com/gin-gonic/gin"
+	r "github.com/gin-gonic/gin/render"
+	"github.com/robvdl/pongo2gin"
 
 	"conf"
 	"templates"
 
+	"modules/auth"
 	"modules/log"
 )
 
-func LoadTemplates() multitemplate.Render {
+func Render() gin.HandlerFunc {
+	if conf.TMPL_TYPE == conf.PONGO2 {
+		return pongo2()
+	} else {
+		return render()
+	}
+}
+
+func render() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Next()
+
+		tmpl, context, err := getContext(c)
+		if err == nil {
+			c.HTML(http.StatusOK, tmpl, gin.H(context))
+		} else {
+			log.DebugPrint("Render Error: %v", err)
+		}
+	}
+}
+
+func getContext(c *gin.Context) (tmpl string, context map[string]interface{}, err error) {
+	tmplName, tmplNameExists := c.Get("tmpl")
+	tmplNameValue, isString := tmplName.(string)
+	tmplData, tmplDataExists := c.Get("data")
+
+	// 模板未定义
+	if !tmplNameExists || !isString {
+		return "", nil, errors.New("No tmpl defined!")
+	}
+
+	// 公共模板数据
+	commonDatas := getCommonContext(c)
+
+	// 模板数据
+	if tmplData != nil && tmplDataExists {
+		contextData, isMap := tmplData.(map[string]interface{})
+
+		if isMap {
+			for key, value := range commonDatas {
+				contextData[key] = value
+			}
+
+			return tmplNameValue, contextData, nil
+		}
+	}
+
+	return tmplNameValue, commonDatas, nil
+
+}
+
+func getCommonContext(c *gin.Context) map[string]interface{} {
+	a := auth.Default(c)
+	userId := a.User.UniqueId().(int64)
+
+	// 公共模板数据
+	commonDatas := make(map[string]interface{})
+	commonDatas["UserId"] = userId
+	commonDatas["UserName"] = "用户名"
+	commonDatas["requestUrl"] = c.Request.URL.String()
+
+	return commonDatas
+}
+
+/**
+ * Gin模板加载
+ * 支持文件/Bindata加载模板
+ */
+
+func LoadTemplates() r.HTMLRender {
 	switch conf.TMPL_TYPE {
+	case conf.PONGO2:
+		return pongo2gin.New(
+			pongo2gin.RenderOptions{
+				TemplateDir: conf.TMPL_DIR,
+				ContentType: "text/html; charset=utf-8",
+			})
 	case conf.BINDATA:
 		return loadTemplatesBindata(conf.TMPL_DIR)
 	default:
@@ -27,13 +108,13 @@ func loadTemplatesDefault(templatesDir string) multitemplate.Render {
 	r := multitemplate.New()
 
 	layoutDir := templatesDir + "/layouts/"
-	layouts, err := filepath.Glob(layoutDir + "*/*.tmpl")
+	layouts, err := filepath.Glob(layoutDir + "*/*" + conf.TMPL_SUFFIX)
 	if err != nil {
 		panic(err.Error())
 	}
 
 	includeDir := templatesDir + "/includes/"
-	includes, err := filepath.Glob(includeDir + "*.tmpl")
+	includes, err := filepath.Glob(includeDir + "*" + conf.TMPL_SUFFIX)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -43,7 +124,7 @@ func loadTemplatesDefault(templatesDir string) multitemplate.Render {
 		files := append(includes, layout)
 		tmpl := template.Must(template.ParseFiles(files...))
 		tmplName := strings.TrimPrefix(layout, layoutDir)
-		tmplName = strings.TrimSuffix(tmplName, ".tmpl")
+		tmplName = strings.TrimSuffix(tmplName, conf.TMPL_SUFFIX)
 		log.DebugPrint("Tmpl add " + tmplName)
 		r.Add(tmplName, tmpl)
 	}
@@ -91,7 +172,7 @@ func loadTemplatesBindata(templatesDir string) multitemplate.Render {
 		files := append(includes, layout)
 		tmpl := template.Must(parseBindataFiles(files...))
 		tmplName := strings.TrimPrefix(layout, layoutDir+"/")
-		tmplName = strings.TrimSuffix(tmplName, ".tmpl")
+		tmplName = strings.TrimSuffix(tmplName, conf.TMPL_SUFFIX)
 		log.DebugPrint("Tmpl add " + tmplName)
 		r.Add(tmplName, tmpl)
 	}
@@ -102,7 +183,7 @@ func loadTemplatesBindata(templatesDir string) multitemplate.Render {
 func tmplsFilter(files []string, dir string) ([]string, error) {
 	var tmpls []string
 	for _, file := range files {
-		if strings.HasSuffix(file, ".tmpl") {
+		if strings.HasSuffix(file, conf.TMPL_SUFFIX) {
 			tmpls = append(tmpls, dir+"/"+file)
 		}
 	}

@@ -1,7 +1,6 @@
 package www
 
 import (
-	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -20,8 +19,9 @@ func UserHandler(c *gin.Context) {
 	model := models.Default(c)
 	u := model.GetUserById(id)
 
-	c.HTML(http.StatusOK, "www/user", H(c, gin.H{
+	c.Set("tmpl", "www/user")
+	c.Set("data", map[string]interface{}{
 		"title": "User",
 		"user":  u,
-	}))
+	})
 }

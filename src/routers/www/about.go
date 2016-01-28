@@ -1,13 +1,12 @@
 package www
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
 )
 
 func AboutHandler(c *gin.Context) {
-	c.HTML(http.StatusOK, "www/about", H(c, gin.H{
+	c.Set("tmpl", "www/about")
+	c.Set("data", map[string]interface{}{
 		"title": "About",
-	}))
+	})
 }

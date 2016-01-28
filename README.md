@@ -32,12 +32,19 @@ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go install gin_sample
 ##Gin框架
 ```
 github.com/gin-gonic/gin
+github.com/gin-gonic/gin/render
 github.com/gin-gonic/contrib/sessions
 github.com/gin-gonic/contrib/cache
 ```
-## ORM
+##ORM
 ```
 github.com/jinzhu/gorm
+```
+
+##模板
+```
+github.com/gin-gonic/gin
+github.com/robvdl/pongo2gin
 ```
 ## 其他
 ```
@@ -49,9 +56,11 @@ github.com/olebedev/staticbin
 	- [x] conf
 ##缓存
 	- [x] Memcached
+	- [x] Memory
 	查询缓存
 	SQL解析缓存
 ##Session
+	- [x] Cookie
 	- [x] Redis
 ##FLASH
 	

@@ -13,8 +13,9 @@ const (
 	CACHE_STORE = "MEMCACHED"
 
 	// Tmpl
-	TMPL_TYPE = "BINDATA"
-	TMPL_DIR  = "templates"
+	TMPL_TYPE   = "PONGO2" // default="",PONGO2,BINDATA
+	TMPL_DIR    = "templates/pongo2"
+	TMPL_SUFFIX = ".html" // .html,.tpl
 
 	// Static
 	STATIC_TYPE = "BINDATA"
@@ -37,4 +38,7 @@ const (
 
 	// Bindata
 	BINDATA = "BINDATA"
+
+	// Pongo2
+	PONGO2 = "PONGO2"
 )

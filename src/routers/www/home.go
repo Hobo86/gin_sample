@@ -1,7 +1,6 @@
 package www
 
 import (
-	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -17,8 +16,9 @@ func HomeHandler(c *gin.Context) {
 	model := models.Default(c)
 	u := model.GetUserById(id)
 
-	c.HTML(http.StatusOK, "www/home", H(c, gin.H{
+	c.Set("tmpl", "www/home")
+	c.Set("data", map[string]interface{}{
 		"title": "Home",
 		"user":  u,
-	}))
+	})
 }
