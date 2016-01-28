@@ -43,7 +43,7 @@ github.com/jinzhu/gorm
 
 ##模板
 ```
-github.com/gin-gonic/gin
+github.com/flosch/pongo2
 github.com/robvdl/pongo2gin
 ```
 ## 其他
@@ -53,15 +53,15 @@ github.com/olebedev/staticbin
 
 #框架功能
 ##配置
-	- [x] conf
+- [x] conf
 ##缓存
-	- [x] Memcached
-	- [x] Memory
+- [x] Memcached
+- [x] Memory
 	查询缓存
 	SQL解析缓存
 ##Session
-	- [x] Cookie
-	- [x] Redis
+- [x] Cookie
+- [x] Redis
 ##FLASH
 	
 ##权限
@@ -80,7 +80,7 @@ github.com/olebedev/staticbin
 ##模板
 	模板布局
 	公共参数
-	PONGO2
+- [x] PONGO2
 	模板替换
 ##日志
 
