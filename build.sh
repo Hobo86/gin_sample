@@ -7,7 +7,7 @@ do
         l)
             OS="linux"
             ;;
-        h)  #help带a参数仅用于测试脚本，并备忘
+        h)
             echo "-l build linux bin, default local"
             echo "-h [a] help"
             exit

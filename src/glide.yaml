@@ -1,0 +1,62 @@
+parent: null
+package: main
+import:
+- package: github.com/gin-gonic/gin
+  version: b3878c2465f34fa1772f666fea9adf05f1dca727
+- package: github.com/pmezard/go-difflib
+  version: 792786c7400a136282c1664665ae0a8db921c6c2
+  subpackages:
+  - difflib
+- package: github.com/flosch/pongo2
+- package: github.com/mattn/go-colorable
+  version: 043ae16291351db8465272edf465c9f388161627
+- package: github.com/jinzhu/inflection
+- package: github.com/davecgh/go-spew
+  version: 5215b55f46b2b919f50a1df0eaa5886afe4e3b3d
+  subpackages:
+  - spew
+- package: github.com/gorilla/context
+- package: golang.org/x/net
+  version: f315505cf3349909cdf013ea56690da34e96a451
+  subpackages:
+  - context
+- package: github.com/gin-gonic/contrib
+  subpackages:
+  - /sessions
+- package: github.com/jinzhu/gorm
+- package: github.com/golang/protobuf
+  version: 2402d76f3d41f928c7902a765dfc872356dd3aad
+  subpackages:
+  - proto
+- package: github.com/boj/redistore
+  version: 0cd55584b172cefd31c4cb84e2904585d898c7b2
+- package: gopkg.in/go-playground/validator.v8
+  version: c193cecd124b5cc722d7ee5538e945bdb3348435
+- package: github.com/robfig/go-cache
+- package: github.com/stretchr/objx
+  version: cbeaeb16a013161a98496fad62933b1d21786672
+- package: github.com/bradfitz/gomemcache
+  subpackages:
+  - /memcache
+- package: github.com/robvdl/pongo2gin
+- package: github.com/gorilla/securecookie
+- package: github.com/go-sql-driver/mysql
+- package: github.com/julienschmidt/httprouter
+  version: 999ba04938b528fb4fb859231ee929958b8db4a6
+- package: github.com/olebedev/staticbin
+- package: gopkg.in/joeybloggs/go-validate-yourself.v4
+  version: a3cb430fa1e43b15e72d7bec5b20d0bdff4c2bb8
+- package: github.com/manucorporat/sse
+  version: ee05b128a739a0fb76c7ebd3ae4810c1de808d6d
+- package: github.com/lib/pq
+  subpackages:
+  - /hstore
+- package: github.com/garyburd/redigo
+  subpackages:
+  - /redis
+- package: github.com/stretchr/testify
+  version: f390dcf405f7b83c997eac1b06768bb9f44dec18
+  subpackages:
+  - assert
+- package: github.com/gorilla/sessions
+  version: f61c3ec2cf65d69e7efedfd4d060fe128882c951

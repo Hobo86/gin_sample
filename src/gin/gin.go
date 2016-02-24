@@ -1,4 +1,4 @@
-package main
+package gin
 
 import (
 	"github.com/gin-gonic/gin"
@@ -15,7 +15,7 @@ import (
 	"routers/www"
 )
 
-func main() {
+func Run() {
 	if conf.GIN_RELEASE_MODE {
 		gin.SetMode(gin.ReleaseMode)
 	}

@@ -43,4 +43,4 @@ echo -e "$LogPrefix `date +"%H:%M:%S"` rmove pkg"
 rm -rf pkg/*
 
 echo -e "$LogPrefix `date +"%H:%M:%S"` [\033[42;37m run \033[0m] server"
-go run gin.go
+go run server.go
