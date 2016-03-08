@@ -10,6 +10,9 @@
 ./build.sh
 ```
 
+##Glide依赖管理
+https://github.com/Masterminds/glide
+
 ##Bindata
 https://github.com/olebedev/staticbin
 

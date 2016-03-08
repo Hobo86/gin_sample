@@ -78,6 +78,9 @@ func Run() {
 		gApi.GET("/user/:id", api.UserHandler)
 		gApi.GET("/login", api.UserLoginHandler)
 		gApi.GET("/register", api.UserRegisterHandler)
+
+		gApi.GET("/post/:id", api.PostHandler)
+		gApi.GET("/posts/:userId/p/:p/s/:s", api.PostsHandler)
 	}
 
 	r.Run(":8080") // listen and serve on 0.0.0.0:8080
