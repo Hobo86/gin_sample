@@ -9,7 +9,7 @@ import (
 )
 
 func HomeHandler(c *gin.Context) {
-	id, err := strconv.ParseInt("1", 10, 64)
+	id, err := strconv.ParseUint("1", 10, 64)
 	if err != nil {
 		panic(err)
 	}

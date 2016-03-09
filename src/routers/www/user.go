@@ -11,7 +11,7 @@ import (
 
 func UserHandler(c *gin.Context) {
 	idStr := c.Param("id")
-	id, err := strconv.ParseInt(idStr, 10, 64)
+	id, err := strconv.ParseUint(idStr, 10, 64)
 	if err != nil {
 		panic(err)
 	}

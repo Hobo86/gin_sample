@@ -79,7 +79,8 @@ func Run() {
 		gApi.GET("/login", api.UserLoginHandler)
 		gApi.GET("/register", api.UserRegisterHandler)
 
-		gApi.GET("/post/:id", api.PostHandler)
+		gApi.GET("/post/save", api.PostSaveHandler)
+		gApi.GET("/post/id/:id", api.PostHandler)
 		gApi.GET("/posts/:userId/p/:p/s/:s", api.PostsHandler)
 	}
 

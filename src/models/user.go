@@ -4,11 +4,13 @@ import (
 	"time"
 
 	"modules/auth"
+	"modules/log"
 )
 
-func (m model) GetUserById(id int64) *User {
+func (m model) GetUserById(id uint64) *User {
 	user := User{}
 	if err := m.db.Where("id = ?", id).First(&user).Error; err != nil {
+		log.DebugPrint("GetUserById error: %v", err)
 		return nil
 	}
 
@@ -18,6 +20,7 @@ func (m model) GetUserById(id int64) *User {
 func (m model) GetUserByNicknamePwd(nickname string, pwd string) *User {
 	user := User{}
 	if err := m.db.Where("nickname = ? AND password = ?", nickname, pwd).First(&user).Error; err != nil {
+		log.DebugPrint("GetUserByNicknamePwd error: %v", err)
 		return nil
 	}
 	return &user
@@ -33,15 +36,15 @@ func (m model) AddUserWithNicknamePwd(nickname string, pwd string) *User {
 }
 
 type User struct {
-	Id        int64
-	Nickname  string `form:"nickname"`
-	Password  string `form:"password"`
-	Gender    int64
-	Birthday  time.Time
-	CreatedAt time.Time `gorm:"column:created_time"`
-	UpdatedAt time.Time `gorm:"column:updated_time"`
+	Id        uint64    `json:"id,omitempty"`
+	Nickname  string    `form:"nickname" json:"nickname,omitempty"`
+	Password  string    `form:"password" json:"-"`
+	Gender    int64     `json:"gender,omitempty"`
+	Birthday  time.Time `json:"birthday,omitempty"`
+	CreatedAt time.Time `gorm:"column:created_time" json:"created_time,omitempty"`
+	UpdatedAt time.Time `gorm:"column:updated_time" json:"updated_time,omitempty"`
 
-	authenticated bool `form:"-" db:"-"`
+	authenticated bool `form:"-" db:"-" json:"-"`
 }
 
 // GetAnonymousUser should generate an anonymous user model
@@ -82,7 +85,7 @@ func (u *User) UniqueId() interface{} {
 // GetById will populate a user object from a database model with
 // a matching id.
 func (u *User) GetById(id interface{}) error {
-	u.Id = id.(int64)
+	u.Id = id.(uint64)
 	// err := dbmap.SelectOne(u, "SELECT * FROM users WHERE id = $1", id)
 	// if err != nil {
 	// 	return err

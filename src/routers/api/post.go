@@ -13,7 +13,7 @@ import (
 
 func PostHandler(c *gin.Context) {
 	idStr := c.Param("id")
-	id, err := strconv.ParseInt(idStr, 10, 64)
+	id, err := strconv.ParseUint(idStr, 10, 64)
 	if err != nil {
 		panic(err)
 	}
@@ -30,7 +30,7 @@ func PostHandler(c *gin.Context) {
 func PostsHandler(c *gin.Context) {
 
 	userIdStr := c.Param("userId")
-	userId, err := strconv.ParseInt(userIdStr, 10, 64)
+	userId, err := strconv.ParseUint(userIdStr, 10, 64)
 	if err != nil {
 		panic(err)
 	}
@@ -50,5 +50,14 @@ func PostsHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"title": "Post",
 		"posts": posts,
+	})
+}
+
+func PostSaveHandler(c *gin.Context) {
+	model := models.Default(c)
+	model.PostSave()
+
+	c.JSON(http.StatusOK, gin.H{
+		"title": "Post Add",
 	})
 }

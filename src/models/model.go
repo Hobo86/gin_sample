@@ -16,6 +16,10 @@ type model struct {
 	db gorm.DB
 }
 
+func (m model) DB() gorm.DB {
+	return m.db
+}
+
 func Model() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		db := conf.DB()
